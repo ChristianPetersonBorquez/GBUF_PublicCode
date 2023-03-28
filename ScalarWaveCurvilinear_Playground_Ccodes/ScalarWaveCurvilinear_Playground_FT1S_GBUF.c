@@ -136,13 +136,13 @@ int main(int argc, const char *argv[]) {
     const REAL t_final = 4.0*domain_size; //2*domain_size;
 
     // Step 0i: Set timestep based on smallest proper distance between gridpoints and CFL factor
-    REAL dt = 0.05/Nxx[0]/Nxx[1]; //Works unless suuper high resolution is used
-    //REAL dt = 0.5*find_timestep(&params, xx); //# original
+    //REAL dt = 0.05/Nxx[0]/Nxx[1]; //Works unless suuper high resolution is used
+    REAL dt = 0.5*find_timestep(&params, xx); //# original
     printf("# Timestep set to = %e\n",(double)dt);
     int N_final = (int)(t_final / dt + 0.5); // The number of points in time.
                                              // Add 0.5 to account for C rounding down
                                              // typecasts to integers.
-    int output_every_N = (int)((REAL)N_final/200.0);
+    int output_every_N = (int)((REAL)N_final/100.0);
     if(output_every_N == 0) output_every_N = 1;
 
     // Step 0j: Error out if the number of auxiliary gridfunctions outnumber evolved gridfunctions.
